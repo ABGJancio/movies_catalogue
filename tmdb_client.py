@@ -11,7 +11,13 @@ def get_movies_list(list_type):
         "Authorization": f"Bearer {API_TOKEN}"
     }
     response = requests.get(endpoint, headers=headers)
-    response.raise_for_status()
+    try:
+        response.raise_for_status()
+    except:
+        print("Nie ma takiej listy")
+    finally:
+        response = requests.get(
+            "https://api.themoviedb.org/3/movie/popular", headers=headers)
     return response.json()
 
 
@@ -60,5 +66,3 @@ def get_movie_images(movie_id):
     }
     response = requests.get(endpoint, headers=headers)
     return response.json()
-
-
