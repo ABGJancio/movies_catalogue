@@ -67,11 +67,11 @@ def test_get_movie_images(monkeypatch):
     assert movie_images == mock_movie_images
 
 def test_get_single_movie_cast(monkeypatch):
-    mock_movie_cast = {"cast": ['credit1', 'credit2']}
+    mock_movie_cast = {'cast': ['credit1', 'credit2']}
     requests_mock = Mock()
     response = requests_mock.return_value
     response.json.return_value = mock_movie_cast
     monkeypatch.setattr("tmdb_client.requests.get", requests_mock)
     movie_cast = tmdb_client.get_single_movie_cast(movie_id=615678)
-    assert movie_cast == mock_movie_cast
+    assert movie_cast == mock_movie_cast['cast']
 
